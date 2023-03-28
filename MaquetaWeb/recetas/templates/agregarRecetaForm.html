@@ -1,0 +1,17 @@
+{% extends "padre.html" %}
+
+{% block titulo %}
+<h2>Comparti tu receta</h2>
+{% endblock %}
+
+{% block contenido %}
+
+<form method = "post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock %}

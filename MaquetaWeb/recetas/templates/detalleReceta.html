@@ -1,0 +1,13 @@
+{% extends "padre.html" %}
+
+{% block titulo %}
+<h3>Receta:</h3> {{ receta.nombre }}
+<h4>Categoria:</h4> {{ receta.categoria }}
+{% endblock %}
+
+{% block contenido %}
+<h4>Ingredientes:</h4> {{ receta.ingredientes }}
+
+<h4>Preparacion:</h4> {{ receta.preparacion }}
+
+{% endblock %}

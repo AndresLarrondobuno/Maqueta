@@ -1,0 +1,29 @@
+{% extends "padre.html" %}
+
+
+{% block contenido %}
+
+  <h2>Resultados de la búsqueda:</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Buscar">
+  </form>
+
+  {% if recetas %}
+    <ul>
+      {% for receta in recetas %}
+        <li> <a href="{% url 'recetas:detalle' receta.slug %}"> <strong>Nombre:</strong> {{ receta.nombre }} </a></li>
+        <li><strong>Categoria:</strong> {{ receta.categoria }}</li>
+        <li><strong>Ingredientes:</strong> {{ receta.ingredientes }}</li>
+        <li><strong>Preparacion:</strong> {{ receta.snippet }}</li>
+        <br>
+      {% endfor %}
+    </ul>
+  {% else %}
+  
+
+    <p>No se encontraron resultados.</p>
+  {% endif %}
+
+{% endblock %}

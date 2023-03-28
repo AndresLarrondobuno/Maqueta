@@ -1,0 +1,17 @@
+{% extends "padre.html" %}
+
+{% block titulo %}
+<h2>Registra tu cuenta</h2>
+{% endblock %}
+
+{% block contenido %}
+
+<form action="{% url 'cuentas:registrarse' %}" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_p }}
+    </table>
+    <input type="submit" value="Registrar Cuenta">
+</form>
+
+{% endblock %}
