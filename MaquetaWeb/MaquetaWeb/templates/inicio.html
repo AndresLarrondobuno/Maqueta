@@ -1,0 +1,13 @@
+{% extends "padre.html" %}
+
+{% block titulo %}
+Inicio
+{% endblock %}
+
+{% block contenido %}
+
+    {% if mensaje %}
+        <h4>{{ mensaje }}</h4>
+    {% endif %}
+
+{% endblock %}

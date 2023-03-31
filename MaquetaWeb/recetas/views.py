@@ -5,8 +5,7 @@ from django.utils.decorators import method_decorator
 from django.http import HttpResponse
 from .forms import *
 from .models import *
-import datetime
-import pytz
+
 
 class RecetasController(View):
 
@@ -19,17 +18,11 @@ class RecetasController(View):
                 informacion = form.cleaned_data
 
                 nombre = informacion["nombre"]
-                categoria = informacion["categoria"]
-                ingredientes = informacion["ingredientes"]
-                preparacion = informacion["preparacion"]
-
                 slug = TraductorDeStrings.nombreASlug(nombre)
-                zonaHoraria = pytz.timezone('America/Argentina/Buenos_Aires')
-                fechaYHorario = datetime.datetime.now(zonaHoraria)
-                fechaYHorario = datetime.datetime(fechaYHorario.year, fechaYHorario.month, fechaYHorario.day, fechaYHorario.hour, fechaYHorario.minute, fechaYHorario.second)
-                fechaYHorarioFormateados = fechaYHorario.strftime(r"%Y-%m-%d %H:%M:%S")
 
-                receta = Receta(nombre=nombre, categoria=categoria, ingredientes=ingredientes, preparacion=preparacion, fechaYHorario=fechaYHorarioFormateados, slug=slug)
+                receta = form.save(commit=False)
+                receta.slug = slug
+                receta.usuario = request.user
                 receta.save()
                 return redirect("recetas:inicio")
         else:
@@ -62,10 +55,6 @@ class RecetasController(View):
 
 
 
-    
-
-recetasController = RecetasController()
-
 def getAtributosParaFiltrado(formulario):
     atributosParaFiltrado = dict()
     for nombreDelAtributo, valor_del_atributo in formulario.items():
@@ -73,6 +62,8 @@ def getAtributosParaFiltrado(formulario):
             atributosParaFiltrado[nombreDelAtributo] = valor_del_atributo
     
     return atributosParaFiltrado
+
+recetasController = RecetasController()
                 
 
                 

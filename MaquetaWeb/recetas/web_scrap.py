@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-pagina = requests.get('https://listado.mercadolibre.com.ar/corrector-postural-espalda#D[A:corrector%20postural%20espalda]')
+pagina = requests.get(r'https://listado.mercadolibre.com.ar/corrector-postural-espalda#D[A:corrector%20postural%20espalda]')
 html = pagina.text
 parser = BeautifulSoup(html, "html.parser")
 

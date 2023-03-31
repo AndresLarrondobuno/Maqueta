@@ -1,12 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Receta(models.Model):
     nombre = models.CharField(max_length=50)
     categoria = models.CharField(max_length=50)
     ingredientes = models.CharField(max_length=50) #Ingrediente con Foreign Key
     preparacion = models.TextField()
-    fechaYHorario = models.DateTimeField()
+    fechaYHorario = models.DateTimeField(auto_now_add=True)
     slug = models.CharField(max_length=50)
+    usuario = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
 
     def __str__(self):
